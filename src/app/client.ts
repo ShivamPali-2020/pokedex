@@ -1,15 +1,5 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-  ApolloLink,
-} from '@apollo/client';
-
+import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
 export const client = new ApolloClient({
-  link: ApolloLink.from([
-    new HttpLink({
-      uri: 'https://graphql-pokemon2.vercel.app',
-    }),
-  ]),
-  cache: new InMemoryCache({}),
+  link: new HttpLink({ uri: "https://graphql-pokemon2.vercel.app" }),
+  cache: new InMemoryCache(),
 });

@@ -1,11 +1,11 @@
-import React from 'react';
-import { createUseStyles } from 'react-jss';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { LayoutProvider } from '../contexts';
-import { Nav } from '../components';
-import { ApolloProvider } from '@apollo/client';
-import { client } from './client';
-import { ListPage, Home } from '../screens';
+import React from "react";
+import { createUseStyles } from "react-jss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LayoutProvider } from "../contexts";
+import { Nav } from "../components";
+import { ApolloProvider } from "@apollo/client/react";
+import { client } from "./client";
+import { ListPage, Home } from "../screens";
 
 function App() {
   const classes = useStyles();
@@ -33,28 +33,28 @@ function App() {
 const useStyles = createUseStyles(
   {
     root: {
-      background: '#171E2b',
-      minHeight: '100vh',
-      minWidth: '100vw',
-      height: '100%',
-      width: '100%',
-      display: 'flex',
+      background: "#171E2b",
+      minHeight: "100vh",
+      minWidth: "100vw",
+      height: "100%",
+      width: "100%",
+      display: "flex",
     },
     content: {
-      flex: '1',
-      overflow: 'hidden',
-      position: 'relative',
+      flex: "1",
+      overflow: "hidden",
+      position: "relative",
     },
     scrollableArea: {
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      overflow: 'auto',
+      overflow: "auto",
     },
   },
-  { name: 'App' }
+  { name: "App" }
 );
 
 export default App;
