@@ -1,20 +1,27 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { Pokemon, useGetPokemons } from 'hooks/useGetPokemons';
+import { Pokemon } from 'hooks/useGetPokemons';
 import PokemonListItem from './PokemonListItem';
 
-export const PokemonList = () => {
+export const PokemonList = ({
+  pokemons = [],
+  loading,
+}: {
+  pokemons: Pokemon[];
+  loading: boolean;
+}) => {
   const classes = useStyles();
-  const { pokemons, loading } = useGetPokemons();
 
   return (
     <div className={classes.root}>
-      {loading && <div>Loading...</div>}
       <div className={classes.pokemonList}>
         {pokemons.map((pkmn: Pokemon) => (
           <PokemonListItem key={pkmn.id} {...pkmn} />
         ))}
       </div>
+      {pokemons.length === 0 && (
+        <div>{loading ? 'Loading...' : 'No Pokemons found'}</div>
+      )}
     </div>
   );
 };
@@ -24,7 +31,6 @@ const useStyles = createUseStyles(
     root: {
       width: '100%',
       textAlign: 'center',
-      padding: '32px',
       boxSizing: 'border-box',
     },
     pokemonList: {
