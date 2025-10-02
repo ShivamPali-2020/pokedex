@@ -5,11 +5,23 @@ import gql from 'graphql-tag';
 export type Pokemon = {
   id: string;
   name: string;
-};
-
-export type PokemonOption = {
-  value: Pokemon['id'];
-  label: Pokemon['name'];
+  number?: string;
+  types?: string[];
+  image?: string;
+  classification?: string;
+  resistant?: string[];
+  weaknesses?: string[];
+  fleeRate?: number;
+  maxCP?: number;
+  maxHP?: number;
+  weight?: {
+    minimum: string;
+    maximum: string;
+  };
+  height?: {
+    minimum: string;
+    maximum: string;
+  };
 };
 
 export const GET_POKEMONS = gql`
@@ -17,6 +29,9 @@ export const GET_POKEMONS = gql`
     pokemons(first: $first) {
       id
       name
+      number
+      types
+      image
     }
   }
 `;
@@ -34,14 +49,8 @@ export const useGetPokemons = () => {
 
   const pokemons: Pokemon[] = useMemo(() => data?.pokemons || [], [data]);
 
-  const pokemonOptions: PokemonOption[] = useMemo(
-    () => pokemons.map((p: Pokemon) => ({ value: p.id, label: p.name })),
-    [pokemons]
-  );
-
   return {
     pokemons,
-    pokemonOptions,
     ...queryRes,
   };
 };
