@@ -29,11 +29,17 @@ const useStyles = createUseStyles(() => ({
     overflow: 'hidden',
   },
 }));
-const PokemonListItem = ({ name, number, types, image }: Pokemon) => {
+const PokemonListItem = ({
+  name,
+  number,
+  types,
+  image,
+  onClick,
+}: Pokemon & { onClick: () => void }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={onClick}>
       <img src={image} alt={name} className={classes.image} />
       <div>{name}</div>
       <div>#{number}</div>
