@@ -8,6 +8,7 @@ export const theme = {
     border: '#2c3e50',
     success: '#28a745',
     error: '#dc3545',
+    skeleton: 'rgba(255, 255, 255, 0.1)',
   },
   spacing: {
     small: '8px',

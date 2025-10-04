@@ -3,7 +3,6 @@ import {
   Modal,
   Box,
   Typography,
-  CircularProgress,
   IconButton,
   Divider,
   Chip,
@@ -13,6 +12,7 @@ import {
 import { useSearchParams } from 'react-router-dom';
 import { useGetPokemonDetails } from 'hooks/useGetPokemonDetails';
 import { theme } from 'theme/theme';
+import PokemonDetailsModalSkeleton from './PokemonDetailsModalSkeleton';
 
 type PokemonDetailsModalProps = {
   open: boolean;
@@ -34,6 +34,8 @@ const style = {
   overflow: 'hidden',
   '@media (max-width: 500px)': {
     width: 250,
+    height: '80%',
+    overflow: 'scroll',
   },
 };
 
@@ -69,17 +71,7 @@ const PokemonDetailsModal = ({ open, onClose }: PokemonDetailsModalProps) => {
           <Icon>close</Icon>
         </IconButton>
 
-        {loading && (
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            height={200}
-            width="100%"
-          >
-            <CircularProgress sx={{ color: theme.colors.text }} />
-          </Box>
-        )}
+        {loading && <PokemonDetailsModalSkeleton />}
 
         {error && (
           <Typography color={theme.colors.error} align="center">

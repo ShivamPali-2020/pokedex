@@ -57,7 +57,7 @@ const PokemonListItem = ({
 
   return (
     <div className={classes.root} onClick={onClick}>
-      <img src={image} alt={name} className={classes.image} />
+      <img src={image} alt={name} className={classes.image} loading="lazy" />
       <div className={classes.name}>{name}</div>
       <div className={classes.number}>#{number}</div>
       <div className={classes.types}>{types?.join(', ')}</div>

@@ -41,7 +41,7 @@ export const PokemonList = ({
   if (loading) {
     return (
       <div className={classes.pokemonList}>
-        <PokemonCardSkeleton count={20} />
+        <PokemonCardSkeleton count={36} />
       </div>
     );
   }

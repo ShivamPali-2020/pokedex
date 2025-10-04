@@ -26,25 +26,32 @@ const PokemonCardSkeleton = ({ count = 1 }: PokemonCardSkeletonProps) => {
         variant="rectangular"
         width={100}
         height={100}
-        sx={{ borderRadius: '10px', mb: 1.25 }}
+        sx={{
+          borderRadius: '10px',
+          mb: 1.25,
+          bgcolor: theme.colors.skeleton,
+        }}
       />
       <Skeleton
         variant="text"
         width={80}
         height={16}
-        sx={{ mb: 1, color: theme.colors.text }}
+        sx={{ mb: 1, color: theme.colors.text, bgcolor: theme.colors.skeleton }}
       />
       <Skeleton
         variant="text"
         width={40}
         height={12}
-        sx={{ mb: 1, color: theme.colors.text }}
+        sx={{ mb: 1, color: theme.colors.text, bgcolor: theme.colors.skeleton }}
       />
       <Skeleton
         variant="text"
         width={60}
         height={12}
-        sx={{ color: theme.colors.text }}
+        sx={{
+          color: theme.colors.text,
+          bgcolor: theme.colors.skeleton,
+        }}
       />
     </Box>
   );
