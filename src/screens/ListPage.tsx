@@ -7,7 +7,7 @@ import { Pokemon } from 'types/Pokemon';
 
 export const ListPage = () => {
   const classes = useStyles();
-  const { pokemons, loading } = useGetPokemons();
+  const { pokemons, loading, error } = useGetPokemons();
   const [search, setSearch] = useState('');
   const filteredPokemons = pokemons.filter((pkmn: Pokemon) =>
     pkmn.name.toLowerCase().includes(search.toLowerCase())
@@ -19,7 +19,11 @@ export const ListPage = () => {
   return (
     <div className={classes.root}>
       <SearchBar handleSearch={handleSearch} />
-      <PokemonList pokemons={filteredPokemons} loading={loading} />
+      <PokemonList
+        pokemons={filteredPokemons}
+        loading={loading}
+        error={Boolean(error)}
+      />
     </div>
   );
 };

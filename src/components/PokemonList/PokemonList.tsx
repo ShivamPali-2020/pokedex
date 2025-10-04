@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { Pokemon } from 'types/Pokemon';
 import PokemonListItem from './PokemonListItem';
+import PokemonCardSkeleton from './PokemonCardSkeleton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import PokemonDetailsModal from './PokemonDetailsModal';
-
+import { Theme } from 'theme/theme';
 export const PokemonList = ({
   pokemons = [],
   loading,
+  error,
 }: {
   pokemons: Pokemon[];
   loading: boolean;
+  error: boolean;
 }) => {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -35,6 +38,30 @@ export const PokemonList = ({
     setSearchParams(new URLSearchParams(), { replace: true });
   };
 
+  if (loading) {
+    return (
+      <div className={classes.pokemonList}>
+        <PokemonCardSkeleton count={20} />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={classes.emptyState}>
+        <div>Failed to load Pokemons</div>
+      </div>
+    );
+  }
+
+  if (pokemons.length === 0) {
+    return (
+      <div className={classes.emptyState}>
+        <div>No Pokemons found</div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className={classes.pokemonList}>
@@ -46,9 +73,6 @@ export const PokemonList = ({
           />
         ))}
       </div>
-      {pokemons.length === 0 && (
-        <div>{loading ? 'Loading...' : 'No Pokemons found'}</div>
-      )}
       {openModal && (
         <PokemonDetailsModal open={openModal} onClose={handleModalClose} />
       )}
@@ -56,7 +80,7 @@ export const PokemonList = ({
   );
 };
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme: Theme) => ({
   root: {
     width: '100%',
     textAlign: 'center',
@@ -70,4 +94,14 @@ const useStyles = createUseStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
-});
+  emptyState: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '300px',
+    color: theme.colors.text,
+    fontSize: theme.fontSizes.medium,
+    fontWeight: theme.fontWeights.medium,
+  },
+}));
