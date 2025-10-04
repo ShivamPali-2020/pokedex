@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { PokemonList } from '../components';
 import SearchBar from 'components/PokemonList/SearchBar';
-import { useGetPokemons, Pokemon } from 'hooks/useGetPokemons';
+import { useGetPokemons } from 'hooks/useGetPokemons';
+import { Pokemon } from 'types/Pokemon';
 
 export const ListPage = () => {
   const classes = useStyles();
@@ -26,9 +27,9 @@ const useStyles = createUseStyles(
   {
     root: {
       width: '100%',
-      height: '100%',
-      padding: '32px',
+      padding: '0 32px 32px 32px',
       boxSizing: 'border-box',
+      position: 'relative',
     },
   },
   { name: 'ListPage' }

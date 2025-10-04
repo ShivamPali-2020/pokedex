@@ -6,25 +6,29 @@ import { Nav } from '../components';
 import { ApolloProvider } from '@apollo/client/react';
 import { client } from './client';
 import { ListPage, Home } from '../screens';
+import { ThemeProvider } from 'react-jss';
+import { theme } from '../theme/theme';
 
 function App() {
   const classes = useStyles();
   return (
     <ApolloProvider client={client}>
       <LayoutProvider>
-        <div className={classes.root}>
-          <BrowserRouter>
-            <Nav />
-            <div className={classes.content}>
-              <div className={classes.scrollableArea}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/pokemon" element={<ListPage />} />
-                </Routes>
+        <ThemeProvider theme={theme}>
+          <div className={classes.root}>
+            <BrowserRouter>
+              <Nav />
+              <div className={classes.content}>
+                <div className={classes.scrollableArea}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/pokemon" element={<ListPage />} />
+                  </Routes>
+                </div>
               </div>
-            </div>
-          </BrowserRouter>
-        </div>
+            </BrowserRouter>
+          </div>
+        </ThemeProvider>
       </LayoutProvider>
     </ApolloProvider>
   );
@@ -33,7 +37,7 @@ function App() {
 const useStyles = createUseStyles(
   {
     root: {
-      background: '#171E2b',
+      background: theme.colors.background,
       minHeight: '100vh',
       minWidth: '100vw',
       height: '100%',
@@ -44,6 +48,7 @@ const useStyles = createUseStyles(
       flex: '1',
       overflow: 'hidden',
       position: 'relative',
+      padding: theme.spacing.medium,
     },
     scrollableArea: {
       position: 'absolute',
@@ -52,6 +57,7 @@ const useStyles = createUseStyles(
       right: 0,
       bottom: 0,
       overflow: 'auto',
+      background: theme.colors.cardBackground,
     },
   },
   { name: 'App' }
